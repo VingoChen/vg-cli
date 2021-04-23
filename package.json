@@ -1,15 +1,29 @@
 {
   "name": "ezv-cli",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "易知微前端脚手架CLI工具",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "babel src -d dist",
+    "watch": "npm run compile -- --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@gitlab.prod.dtstack.cn:10022/zhishui/easy-cli.git"
+  "bin": {
+    "ezv-cli": "./bin/cmd",
+    "ezv": "./bin/cmd"
   },
-  "author": "zhishui",
-  "license": "ISC"
+  "keywords": [
+    "脚手架"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "chalk": "^3.0.0",
+    "commander": "^5.0.0",
+    "download-git-repo": "^3.0.2",
+    "inquirer": "^7.1.0",
+    "log-symbols": "^3.0.0",
+    "ora": "^4.0.3"
+  }
 }
