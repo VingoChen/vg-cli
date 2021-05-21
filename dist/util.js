@@ -12,6 +12,10 @@ var _downloadGitRepo = _interopRequireDefault(require("download-git-repo"));
 
 var _ora = _interopRequireDefault(require("ora"));
 
+var _detectPortAlt = _interopRequireDefault(require("detect-port-alt"));
+
+var _isRoot = _interopRequireDefault(require("is-root"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const util = require('util');
@@ -87,12 +91,33 @@ const loadCmd = (cmd, text) => {
   return exec(cmd).then(() => {
     loading.succeed(`${text} success`);
   });
-};
+}; // 端口选择
+
+
+async function choosePort(port, host) {
+  const isInteractive = process.stdout.isTTY;
+  const resPort = await (0, _detectPortAlt.default)(port, host);
+
+  if (resPort === port) {
+    return resPort;
+  }
+
+  const message = process.platform !== 'win32' && port < 1024 && !(0, _isRoot.default)() ? 'Admin permissions are required to run a server on a port below 1024.' : `Something is already running on port ${port}.`;
+
+  if (isInteractive) {
+    console.log(_chalk.default.yellow(message));
+    return resPort;
+  }
+
+  console.log(_chalk.default.red(message));
+  return null;
+}
 
 module.exports = {
   notExistFold,
   prompt,
   downloadTemplate,
   updateJsonFile,
-  loadCmd
+  loadCmd,
+  choosePort
 };

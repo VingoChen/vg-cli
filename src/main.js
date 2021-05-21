@@ -1,5 +1,7 @@
 import program from 'commander';
 import create from './create'; // 项目创建
+import dev from './dev';
+import build from './build';
 
 /**
  * 命令列表
@@ -11,16 +13,47 @@ const actionMap = {
     usages: ['ezv create ProjectName'],
     alias: 'c', // 命令简称
   },
+  // 项目启动
+  dev: {
+    description: '本地启动项目',
+    usages: ['ezv dev'],
+    // options: [
+    //   {
+    //     flags: '-p --port <port>',
+    //     description: '端口',
+    //     defaultValue: 3000,
+    //   },
+    // ],
+    alias: 'd',
+  },
+  // 项目打包
+  build: {
+    description: '项目打包',
+    usages: ['ezv build'],
+    // options: [
+    //   {
+    //     flags: '-u --username <port>',
+    //     description: 'github用户名',
+    //     defaultValue: '',
+    //   },
+    //   {
+    //     flags: '-t --token <port>',
+    //     description: 'github创建的token',
+    //     defaultValue: '',
+    //   },
+    // ],
+    alias: 'b',
+  },
 };
 
 // 添加create,init,dev命令
 Object.keys(actionMap).forEach((action) => {
-  // if (actionMap[action].options) {
-  // 	Object.keys(actionMap[action].options).forEach(option => {
-  // 		let obj = actionMap[action].options[option];
-  // 		program.option(obj.flags, obj.description, obj.defaultValue);
-  // 	});
-  // }
+  if (actionMap[action].options) {
+    Object.keys(actionMap[action].options).forEach((option) => {
+      let obj = actionMap[action].options[option];
+      program.option(obj.flags, obj.description, obj.defaultValue);
+    });
+  }
 
   program
     .command(action)
@@ -30,6 +63,12 @@ Object.keys(actionMap).forEach((action) => {
       switch (action) {
         case 'create':
           create(...process.argv.slice(3));
+          break;
+        case 'dev':
+          dev();
+          break;
+        case 'build':
+          build();
           break;
         default:
           break;

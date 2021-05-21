@@ -4,6 +4,10 @@ var _commander = _interopRequireDefault(require("commander"));
 
 var _create = _interopRequireDefault(require("./create"));
 
+var _dev = _interopRequireDefault(require("./dev"));
+
+var _build = _interopRequireDefault(require("./build"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 项目创建
@@ -19,20 +23,61 @@ const actionMap = {
     usages: ['ezv create ProjectName'],
     alias: 'c' // 命令简称
 
+  },
+  // 项目启动
+  dev: {
+    description: '本地启动项目',
+    usages: ['ezv dev'],
+    // options: [
+    //   {
+    //     flags: '-p --port <port>',
+    //     description: '端口',
+    //     defaultValue: 3000,
+    //   },
+    // ],
+    alias: 'd'
+  },
+  // 项目打包
+  build: {
+    description: '项目打包',
+    usages: ['ezv build'],
+    // options: [
+    //   {
+    //     flags: '-u --username <port>',
+    //     description: 'github用户名',
+    //     defaultValue: '',
+    //   },
+    //   {
+    //     flags: '-t --token <port>',
+    //     description: 'github创建的token',
+    //     defaultValue: '',
+    //   },
+    // ],
+    alias: 'b'
   }
 }; // 添加create,init,dev命令
 
 Object.keys(actionMap).forEach(action => {
-  // if (actionMap[action].options) {
-  // 	Object.keys(actionMap[action].options).forEach(option => {
-  // 		let obj = actionMap[action].options[option];
-  // 		program.option(obj.flags, obj.description, obj.defaultValue);
-  // 	});
-  // }
+  if (actionMap[action].options) {
+    Object.keys(actionMap[action].options).forEach(option => {
+      let obj = actionMap[action].options[option];
+
+      _commander.default.option(obj.flags, obj.description, obj.defaultValue);
+    });
+  }
+
   _commander.default.command(action).description(actionMap[action].description).alias(actionMap[action].alias).action(() => {
     switch (action) {
       case 'create':
         (0, _create.default)(...process.argv.slice(3));
+        break;
+
+      case 'dev':
+        (0, _dev.default)();
+        break;
+
+      case 'build':
+        (0, _build.default)();
         break;
 
       default:

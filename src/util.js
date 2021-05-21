@@ -4,6 +4,8 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 import downloadGit from 'download-git-repo';
 import ora from 'ora';
+import detect from 'detect-port-alt';
+import isRoot from 'is-root';
 
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
@@ -81,10 +83,31 @@ const loadCmd = (cmd, text) => {
   });
 };
 
+// 端口选择
+async function choosePort(port, host) {
+  const isInteractive = process.stdout.isTTY;
+  const resPort = await detect(port, host);
+  if (resPort === port) {
+    return resPort;
+  }
+  const message =
+    process.platform !== 'win32' && port < 1024 && !isRoot()
+      ? 'Admin permissions are required to run a server on a port below 1024.'
+      : `Something is already running on port ${port}.`;
+
+  if (isInteractive) {
+    console.log(chalk.yellow(message));
+    return resPort;
+  }
+  console.log(chalk.red(message));
+  return null;
+}
+
 module.exports = {
   notExistFold,
   prompt,
   downloadTemplate,
   updateJsonFile,
   loadCmd,
+  choosePort,
 };
