@@ -28,35 +28,37 @@ const actionMap = {
   dev: {
     description: '本地启动项目',
     usages: ['ezv dev'],
-    // options: [
-    //   {
-    //     flags: '-p --port <port>',
-    //     description: '端口',
-    //     defaultValue: 3000,
-    //   },
-    // ],
+    options: [{
+      flags: '-p --port <port>',
+      description: '端口',
+      defaultValue: 9000
+    }, {
+      flags: '-h --host <host>',
+      description: 'host',
+      defaultValue: '0.0.0.0'
+    }, {
+      flags: '-m --mode <mode>',
+      description: '环境',
+      defaultValue: 'dev'
+    }],
     alias: 'd'
   },
   // 项目打包
   build: {
     description: '项目打包',
     usages: ['ezv build'],
-    // options: [
-    //   {
-    //     flags: '-u --username <port>',
-    //     description: 'github用户名',
-    //     defaultValue: '',
-    //   },
-    //   {
-    //     flags: '-t --token <port>',
-    //     description: 'github创建的token',
-    //     defaultValue: '',
-    //   },
-    // ],
+    options: [{
+      flags: '-r --report <report>',
+      description: '打包分析',
+      defaultValue: '0'
+    }, {
+      flags: '-m --mode <mode>',
+      description: '环境',
+      defaultValue: 'dev'
+    }],
     alias: 'b'
   }
-}; // 添加create,init,dev命令
-
+};
 Object.keys(actionMap).forEach(action => {
   if (actionMap[action].options) {
     Object.keys(actionMap[action].options).forEach(option => {
@@ -67,17 +69,24 @@ Object.keys(actionMap).forEach(action => {
   }
 
   _commander.default.command(action).description(actionMap[action].description).alias(actionMap[action].alias).action(() => {
+    const {
+      mode,
+      port,
+      host,
+      report
+    } = _commander.default;
+
     switch (action) {
       case 'create':
         (0, _create.default)(...process.argv.slice(3));
         break;
 
       case 'dev':
-        (0, _dev.default)();
+        (0, _dev.default)(mode, port, host);
         break;
 
       case 'build':
-        (0, _build.default)();
+        (0, _build.default)(mode, report);
         break;
 
       default:

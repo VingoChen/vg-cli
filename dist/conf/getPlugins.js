@@ -18,8 +18,6 @@ var _forkTsCheckerWebpackPlugin = _interopRequireDefault(require("fork-ts-checke
 
 var _paths = _interopRequireDefault(require("./paths"));
 
-var _env = _interopRequireDefault(require("./env"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -56,8 +54,6 @@ const getPlugins = isProd => {
     typescript: {
       configFile: _paths.default.appTsConfig
     }
-  }), new _webpack.DefinePlugin({
-    'process.env': (0, _env.default)()
   }), ...(isProd ? prodPlugins : devPlugins)];
   return defaultPlugins;
 };

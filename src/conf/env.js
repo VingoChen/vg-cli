@@ -1,16 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 
-const getEnvConf = () => {
-  const NODE_ENV = process.env.NODE_ENV || 'development';
+const getEnvConf = (mode) => {
   const appDirectory = fs.realpathSync(process.cwd());
-  const defaultEzvConfFile = path.resolve(
-    appDirectory,
-    'config/ezv.local.config.js',
-  );
+  const defaultEzvConfFile = path.resolve(appDirectory, 'config/ezv.config.js');
   const EzvConfFile = path.resolve(
     appDirectory,
-    `config/ezv.${NODE_ENV}.config.js`,
+    `config/ezv.${mode}.config.js`,
   );
 
   let envStringified = {};

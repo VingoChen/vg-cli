@@ -1,19 +1,27 @@
 import TerserPlugin from 'terser-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import { DefinePlugin } from 'webpack';
 import paths from './paths';
 import getLoaders from './getLoaders';
 import getPlugins from './getPlugins';
+import getEnvConf from './env';
+
 /**
- *
  * @param {string} env webpack环境 development | production
  */
-const getGeneratorWebpackConf = (env) => {
+const getGeneratorWebpackConf = (env, mode) => {
   if (!env) {
     return {};
   }
   const isProd = env === 'production';
   const defaultPlugins = getPlugins(isProd);
   const defaultLoaders = getLoaders(isProd);
+
+  defaultPlugins.push(
+    new DefinePlugin({
+      'process.env': getEnvConf(mode),
+    }),
+  );
 
   const webpackConf = {
     mode: env,

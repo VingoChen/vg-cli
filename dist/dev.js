@@ -16,20 +16,18 @@ var _util = require("./util");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const dev = () => {
-  const webpackDevConf = (0, _getGeneratorWebpackConf.default)('development');
+const dev = (mode = 'dev', port = _constans.SERVER_PORT, host = _constans.SERVER_HOST) => {
+  const webpackDevConf = (0, _getGeneratorWebpackConf.default)('development', mode);
   const compiler = (0, _webpack.default)(webpackDevConf);
   const server = new _webpackDevServer.default(compiler, _devServerConf.default);
-  (0, _util.choosePort)(_constans.SERVER_PORT, _constans.SERVER_HOST).then(resPort => {
+  (0, _util.choosePort)(port, host).then(resPort => {
     if (resPort !== null) {
-      server.listen(resPort, _constans.SERVER_HOST, err => {
-        console.log(process.env);
-
+      server.listen(resPort, host, err => {
         if (err) {
           return _logger.default.error(err.message);
         }
 
-        return _logger.default.start(resPort, _constans.SERVER_HOST);
+        return _logger.default.start(resPort, host);
       });
     }
   }).catch(error => {

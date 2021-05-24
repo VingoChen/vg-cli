@@ -1,4 +1,4 @@
-import { HotModuleReplacementPlugin, DefinePlugin } from 'webpack';
+import { HotModuleReplacementPlugin } from 'webpack';
 import ErrorOverlayPlugin from 'error-overlay-webpack-plugin';
 import WebpackBar from 'webpackbar';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
@@ -7,7 +7,6 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import paths from './paths';
-import getEnvConf from './env';
 
 /**
  * @param {boolean} isProd 是否是生产环境
@@ -58,9 +57,6 @@ const getPlugins = (isProd) => {
       typescript: {
         configFile: paths.appTsConfig,
       },
-    }),
-    new DefinePlugin({
-      'process.env': getEnvConf(),
     }),
     ...(isProd ? prodPlugins : devPlugins),
   ];

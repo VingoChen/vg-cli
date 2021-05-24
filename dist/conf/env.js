@@ -6,14 +6,12 @@ var _path = _interopRequireDefault(require("path"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const getEnvConf = () => {
-  const NODE_ENV = process.env.NODE_ENV || 'development';
-
+const getEnvConf = mode => {
   const appDirectory = _fs.default.realpathSync(process.cwd());
 
-  const defaultEzvConfFile = _path.default.resolve(appDirectory, 'config/ezv.local.config.js');
+  const defaultEzvConfFile = _path.default.resolve(appDirectory, 'config/ezv.config.js');
 
-  const EzvConfFile = _path.default.resolve(appDirectory, `config/ezv.${NODE_ENV}.config.js`);
+  const EzvConfFile = _path.default.resolve(appDirectory, `config/ezv.${mode}.config.js`);
 
   let envStringified = {};
 

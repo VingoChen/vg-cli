@@ -6,22 +6,21 @@ import { SERVER_HOST, SERVER_PORT } from './conf/constans';
 import logger from './conf/logger';
 import { choosePort } from './util';
 
-const dev = () => {
-  const webpackDevConf = getGeneratorWebpackConf('development');
+const dev = (mode = 'dev', port = SERVER_PORT, host = SERVER_HOST) => {
+  const webpackDevConf = getGeneratorWebpackConf('development', mode);
 
   const compiler = Webpack(webpackDevConf);
 
   const server = new WebpackDevServer(compiler, devServerConf);
 
-  choosePort(SERVER_PORT, SERVER_HOST)
+  choosePort(port, host)
     .then((resPort) => {
       if (resPort !== null) {
-        server.listen(resPort, SERVER_HOST, (err) => {
-          console.log(process.env);
+        server.listen(resPort, host, (err) => {
           if (err) {
             return logger.error(err.message);
           }
-          return logger.start(resPort, SERVER_HOST);
+          return logger.start(resPort, host);
         });
       }
     })
