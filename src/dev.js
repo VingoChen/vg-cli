@@ -8,7 +8,7 @@ import { choosePort } from './util';
 const dev = (mode = 'dev', port = SERVER_PORT, host = SERVER_HOST, report) => {
   const webpackDevConf = getGeneratorWebpackConf('development', mode, report);
   const devServerConf = webpackDevConf.devServer;
-  console.log(webpackDevConf);
+
   const compiler = Webpack(webpackDevConf);
 
   const server = new WebpackDevServer(compiler, devServerConf);

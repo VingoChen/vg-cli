@@ -17,7 +17,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const dev = (mode = 'dev', port = _constans.SERVER_PORT, host = _constans.SERVER_HOST, report) => {
   const webpackDevConf = (0, _getGeneratorWebpackConf.default)('development', mode, report);
   const devServerConf = webpackDevConf.devServer;
-  console.log(webpackDevConf);
   const compiler = (0, _webpack.default)(webpackDevConf);
   const server = new _webpackDevServer.default(compiler, devServerConf);
   (0, _util.choosePort)(port, host).then(resPort => {

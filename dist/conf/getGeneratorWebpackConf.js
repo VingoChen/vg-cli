@@ -74,7 +74,7 @@ const getGeneratorWebpackConf = (env, mode, report) => {
 
   defaultPlugins.push(new _webpack.DefinePlugin({
     'process.env': {
-      NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+      NODE_ENV: JSON.stringify(env),
       ...config.defineStringified
     }
   }));
