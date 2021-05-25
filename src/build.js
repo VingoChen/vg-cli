@@ -1,20 +1,9 @@
 import Webpack from 'webpack';
 import getGeneratorWebpackConf from './conf/getGeneratorWebpackConf';
-import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
-import { ANALYZER_HOST, ANALYZER_PORT } from './conf/constans';
 import logger from './conf/logger';
 
-const build = (mode = 'dev', report) => {
-  const webpackBuildConf = getGeneratorWebpackConf('production', mode);
-  if (report === '1') {
-    webpackBuildConf.plugins.push(
-      new BundleAnalyzerPlugin.BundleAnalyzerPlugin({
-        analyzerMode: 'server',
-        analyzerHost: ANALYZER_HOST,
-        analyzerPort: ANALYZER_PORT,
-      }),
-    );
-  }
+const build = async (mode = 'dev', report) => {
+  const webpackBuildConf = getGeneratorWebpackConf('production', mode, report);
 
   Webpack(webpackBuildConf, (err) => {
     if (err) {

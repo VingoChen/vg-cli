@@ -6,8 +6,6 @@ var _webpackDevServer = _interopRequireDefault(require("webpack-dev-server"));
 
 var _getGeneratorWebpackConf = _interopRequireDefault(require("./conf/getGeneratorWebpackConf"));
 
-var _devServerConf = _interopRequireDefault(require("./conf/devServerConf"));
-
 var _constans = require("./conf/constans");
 
 var _logger = _interopRequireDefault(require("./conf/logger"));
@@ -16,10 +14,12 @@ var _util = require("./util");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const dev = (mode = 'dev', port = _constans.SERVER_PORT, host = _constans.SERVER_HOST) => {
-  const webpackDevConf = (0, _getGeneratorWebpackConf.default)('development', mode);
+const dev = (mode = 'dev', port = _constans.SERVER_PORT, host = _constans.SERVER_HOST, report) => {
+  const webpackDevConf = (0, _getGeneratorWebpackConf.default)('development', mode, report);
+  const devServerConf = webpackDevConf.devServer;
+  console.log(webpackDevConf);
   const compiler = (0, _webpack.default)(webpackDevConf);
-  const server = new _webpackDevServer.default(compiler, _devServerConf.default);
+  const server = new _webpackDevServer.default(compiler, devServerConf);
   (0, _util.choosePort)(port, host).then(resPort => {
     if (resPort !== null) {
       server.listen(resPort, host, err => {

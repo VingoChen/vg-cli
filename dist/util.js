@@ -85,7 +85,7 @@ const updateJsonFile = (fileName, obj) => {
 }; // 命令行命令执行
 
 
-const loadCmd = (cmd, text) => {
+const loadCmd = (cmd, text = '') => {
   let loading = (0, _ora.default)();
   loading.start(`excute ${text} ....`);
   return exec(cmd).then(() => {

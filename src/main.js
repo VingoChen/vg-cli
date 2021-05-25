@@ -33,6 +33,11 @@ const actionMap = {
         description: '环境',
         defaultValue: 'dev',
       },
+      {
+        flags: '-r --report <report>',
+        description: '打包分析',
+        defaultValue: '0',
+      },
     ],
     alias: 'd',
   },
