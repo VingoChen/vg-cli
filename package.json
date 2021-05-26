@@ -1,6 +1,6 @@
 {
   "name": "ezv-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "易知微前端脚手架CLI工具",
   "main": "index.js",
   "scripts": {

@@ -8,8 +8,7 @@ import {
   updateJsonFile,
   loadCmd,
 } from './util';
-const API =
-  'direct:http://gitlab.prod.dtstack.cn/zhishui/easy-cli-template.git';
+const API = 'direct:http://gitlab.prod.dtstack.cn/visdev/easy-cli-template.git';
 
 const create = async (ProjectName) => {
   // 项目名不能为空
