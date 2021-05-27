@@ -2,7 +2,7 @@
 
 ### 安装
 
-`npm i -g vg-cli`
+`npm i -g vingo-cli`
 
 ### 使用
 

@@ -1,5 +1,5 @@
 {
-	"name": "vg-cli",
+	"name": "vingo-cli",
 	"version": "1.0.0",
 	"description": "脚手架CLI工具",
 	"main": "index.js",
