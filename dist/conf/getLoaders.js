@@ -11,21 +11,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 const getLoaders = isProd => {
   const getCssLoaders = importLoaders => {
-    return [isProd ? _miniCssExtractPlugin.default.loader : 'style-loader', {
-      loader: 'css-loader',
+    return [isProd ? _miniCssExtractPlugin.default.loader : require.resolve("style-loader"), {
+      loader: require.resolve("css-loader"),
       options: {
         modules: false,
         sourceMap: !isProd,
         importLoaders
       }
     }, {
-      loader: 'postcss-loader',
+      loader: require.resolve("postcss-loader"),
       options: {
         postcssOptions: {
-          plugins: [require('postcss-flexbugs-fixes'), isProd && ['postcss-preset-env', {
+          plugins: [require("postcss-flexbugs-fixes"), isProd && ["postcss-preset-env", {
             autoprefixer: {
               grid: true,
-              flexbox: 'no-2009'
+              flexbox: "no-2009"
             },
             stage: 3
           }]].filter(Boolean)
@@ -36,14 +36,14 @@ const getLoaders = isProd => {
 
   const defaultLoaders = [{
     test: /\.(tsx?|js)$/,
-    loader: 'babel-loader',
+    loader: require.resolve("babel-loader"),
     options: {
       cacheDirectory: true
     },
     exclude: /node_modules/
   }, {
     test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-    type: 'asset',
+    type: "asset",
     parser: {
       dataUrlCondition: {
         maxSize: _constans.IMAGE_INLINE_SIZE_LIMIT
@@ -51,14 +51,14 @@ const getLoaders = isProd => {
     }
   }, {
     test: /\.(ttf|woff|woff2|eot|otf)$/,
-    type: 'asset/resource'
+    type: "asset/resource"
   }, {
     test: /\.css/,
     use: getCssLoaders(1)
   }, {
     test: /\.scss$/,
     use: [...getCssLoaders(2), {
-      loader: 'sass-loader',
+      loader: require.resolve("sass-loader"),
       options: {
         sourceMap: !isProd
       }
