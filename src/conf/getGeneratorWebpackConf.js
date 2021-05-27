@@ -30,7 +30,7 @@ const getGeneratorWebpackConf = (env, mode, report) => {
       proxy = {},
       alias = {},
       analyze,
-      configureWebpack,
+      configureWebpack = {},
     } = existConfig;
 
     // define
