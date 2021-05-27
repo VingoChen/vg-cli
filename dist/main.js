@@ -18,49 +18,49 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const actionMap = {
   // 项目创建
   create: {
-    description: '创建一个新的项目',
+    description: "创建一个新的项目",
     // 描述
-    usages: ['ezv create ProjectName'],
-    alias: 'c' // 命令简称
+    usages: ["vg create ProjectName"],
+    alias: "c" // 命令简称
 
   },
   // 项目启动
   dev: {
-    description: '本地启动项目',
-    usages: ['ezv dev'],
+    description: "本地启动项目",
+    usages: ["vg dev"],
     options: [{
-      flags: '-p --port <port>',
-      description: '端口',
+      flags: "-p --port <port>",
+      description: "端口",
       defaultValue: 9000
     }, {
-      flags: '-h --host <host>',
-      description: 'host',
-      defaultValue: '0.0.0.0'
+      flags: "-h --host <host>",
+      description: "host",
+      defaultValue: "0.0.0.0"
     }, {
-      flags: '-m --mode <mode>',
-      description: '环境',
-      defaultValue: 'dev'
+      flags: "-m --mode <mode>",
+      description: "环境",
+      defaultValue: "dev"
     }, {
-      flags: '-r --report <report>',
-      description: '打包分析',
-      defaultValue: '0'
+      flags: "-r --report <report>",
+      description: "打包分析",
+      defaultValue: "0"
     }],
-    alias: 'd'
+    alias: "d"
   },
   // 项目打包
   build: {
-    description: '项目打包',
-    usages: ['ezv build'],
+    description: "项目打包",
+    usages: ["vg build"],
     options: [{
-      flags: '-r --report <report>',
-      description: '打包分析',
-      defaultValue: '0'
+      flags: "-r --report <report>",
+      description: "打包分析",
+      defaultValue: "0"
     }, {
-      flags: '-m --mode <mode>',
-      description: '环境',
-      defaultValue: 'dev'
+      flags: "-m --mode <mode>",
+      description: "环境",
+      defaultValue: "dev"
     }],
-    alias: 'b'
+    alias: "b"
   }
 };
 Object.keys(actionMap).forEach(action => {
@@ -81,15 +81,15 @@ Object.keys(actionMap).forEach(action => {
     } = _commander.default;
 
     switch (action) {
-      case 'create':
+      case "create":
         (0, _create.default)(...process.argv.slice(3));
         break;
 
-      case 'dev':
+      case "dev":
         (0, _dev.default)(mode, port, host);
         break;
 
-      case 'build':
+      case "build":
         (0, _build.default)(mode, report);
         break;
 
@@ -99,7 +99,7 @@ Object.keys(actionMap).forEach(action => {
   });
 }); // 项目版本
 
-_commander.default.version(require('../package.json').version, '-v --version').parse(process.argv);
+_commander.default.version(require("../package.json").version, "-v --version").parse(process.argv);
 /**
  * 命令后不带参数的时候，输出帮助信息
  */
