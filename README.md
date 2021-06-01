@@ -16,27 +16,27 @@
 #### 指定端口/host：
 
 ```js
-  ezv dev --port 1234
-  ezv dev --host 1.1.1.1
+  vg dev --port 1234
+  vg dev --host 1.1.1.1
 ```
 
 #### 打包分析
 
 ```js
-  ezv dev --report 1
+  vg dev --report 1
 ```
 
-当使用 --report 1 时，并且根目录 config/ezv.config.js 配置了 analyze,会启用对应打包分析配置
+当使用 --report 1 时，并且根目录 config/vg.config.js 配置了 analyze,会启用对应打包分析配置
 
 #### 自定义配置
 
-可以通过在项目根目录创建 config/ezv.config.js 进行额外配置。
+可以通过在项目根目录创建 config/vg.config.js 进行额外配置。
 
-默认读取 ezv.config.js 的配置，若需要多环境的配置,请通过 mode 命令指定,将会读取对应的配置文件：
+默认读取 vg.config.js 的配置，若需要多环境的配置,请通过 mode 命令指定,将会读取对应的配置文件：
 
 ```js
-  ezv dev --mode A  // config/ezv.A.config
-  ezv dev --mode B  // config/ezv.B.config
+  vg dev --mode A  // config/vg.A.config
+  vg dev --mode B  // config/vg.B.config
 ```
 
 eg:
