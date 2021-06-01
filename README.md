@@ -13,25 +13,37 @@
 | 构建项目 | **vg dev**    | `vg d` |
 | 查看帮助 | **vg help**   | `vg h` |
 
-#### 参数说明：
+#### 指定端口/host：
 
-`--mode: vg dev --mode dev 或 vg build --mode dev `
-环境配置，如，此时设置 mode 为 dev,若项目根目录创建了 config/vg.dev.config.js,那么启用对应环境的额外项目配置.
-`--host: vg dev --host 1.1.1.1`
-指定 host
-`--port: vg dev --port 1234`
-指定端口
-`--report: vg dev --report 1 或 vg build --report 1`
-当使用 --report 1 时，并且根目录 config/vg.config.js 配置了 analyze,会启用对应打包分析配置
+```js
+  ezv dev --port 1234
+  ezv dev --host 1.1.1.1
+```
+
+#### 打包分析
+
+```js
+  ezv dev --report 1
+```
+
+当使用 --report 1 时，并且根目录 config/ezv.config.js 配置了 analyze,会启用对应打包分析配置
 
 #### 自定义配置
 
-可以通过在项目根目录创建 config/vg.config.js 进行额外配置。
+可以通过在项目根目录创建 config/ezv.config.js 进行额外配置。
+
+默认读取 ezv.config.js 的配置，若需要多环境的配置,请通过 mode 命令指定,将会读取对应的配置文件：
+
+```js
+  ezv dev --mode A  // config/ezv.A.config
+  ezv dev --mode B  // config/ezv.B.config
+```
+
 eg:
 
 ```js
 module.exports = {
-	// 环境变量 可以通过 process.env 读取
+	// 环境变量配置，同时在typings下声明 declare const NAME = "xiaoming"，即可访问。
 	define: {
 		NAME: "xiaoming",
 	},

@@ -8,14 +8,12 @@ const existConfigFile = mode => {
 	const defaultVgConfFile = path.resolve(appDirectory, "config/vg.config.js");
 	const vgConfFile = path.resolve(appDirectory, `config/vg.${mode}.config.js`);
 
+	if (fs.existsSync(vgConfFile)) {
+		return require(vgConfFile);
+	}
+
 	if (fs.existsSync(defaultVgConfFile)) {
-		let configFile = {};
-		if (fs.existsSync(vgConfFile)) {
-			configFile = require(vgConfFile);
-		} else {
-			configFile = require(defaultVgConfFile);
-		}
-		return configFile;
+		return require(defaultVgConfFile);
 	}
 
 	return false;
