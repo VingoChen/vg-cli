@@ -16,16 +16,12 @@ const existConfigFile = mode => {
 
   const vgConfFile = _path.default.resolve(appDirectory, `config/vg.${mode}.config.js`);
 
+  if (_fs.default.existsSync(vgConfFile)) {
+    return require(vgConfFile);
+  }
+
   if (_fs.default.existsSync(defaultVgConfFile)) {
-    let configFile = {};
-
-    if (_fs.default.existsSync(vgConfFile)) {
-      configFile = require(vgConfFile);
-    } else {
-      configFile = require(defaultVgConfFile);
-    }
-
-    return configFile;
+    return require(defaultVgConfFile);
   }
 
   return false;

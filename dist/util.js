@@ -18,14 +18,14 @@ var _isRoot = _interopRequireDefault(require("is-root"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const util = require('util');
+const util = require("util");
 
-const exec = util.promisify(require('child_process').exec); // 文件是否存在
+const exec = util.promisify(require("child_process").exec); // 文件是否存在
 
 const notExistFold = async name => {
   return new Promise(resolve => {
     if (_fs.default.existsSync(name)) {
-      console.log(_logSymbols.default.error, _chalk.default.red('文件夹名已被占用，请更换名字重新创建'));
+      console.log(_logSymbols.default.error, _chalk.default.red("文件夹名已被占用，请更换名字重新创建"));
     } else {
       resolve();
     }
@@ -34,13 +34,13 @@ const notExistFold = async name => {
 
 
 const promptList = [{
-  type: 'input',
-  name: 'description',
-  message: 'Please enter the project description: '
+  type: "input",
+  name: "description",
+  message: "Please enter the project description: "
 }, {
-  type: 'input',
-  name: 'author',
-  message: 'Please enter the author name: '
+  type: "input",
+  name: "author",
+  message: "Please enter the author name: "
 }];
 
 const prompt = () => {
@@ -77,7 +77,7 @@ const updateJsonFile = (fileName, obj) => {
         json[key] = obj[key];
       });
 
-      _fs.default.writeFileSync(fileName, JSON.stringify(json, null, '\t'), 'utf-8');
+      _fs.default.writeFileSync(fileName, JSON.stringify(json, null, "\t"), "utf-8");
 
       resolve();
     }
@@ -85,7 +85,7 @@ const updateJsonFile = (fileName, obj) => {
 }; // 命令行命令执行
 
 
-const loadCmd = (cmd, text = '') => {
+const loadCmd = (cmd, text = "") => {
   let loading = (0, _ora.default)();
   loading.start(`excute ${text} ....`);
   return exec(cmd).then(() => {
@@ -102,7 +102,7 @@ async function choosePort(port, host) {
     return resPort;
   }
 
-  const message = process.platform !== 'win32' && port < 1024 && !(0, _isRoot.default)() ? 'Admin permissions are required to run a server on a port below 1024.' : `Something is already running on port ${port}.`;
+  const message = process.platform !== "win32" && port < 1024 && !(0, _isRoot.default)() ? "Admin permissions are required to run a server on a port below 1024." : `Something is already running on port ${port}.`;
 
   if (isInteractive) {
     console.log(_chalk.default.yellow(message));

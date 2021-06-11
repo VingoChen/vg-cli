@@ -14,7 +14,10 @@ const getLoaders = isProd => {
     return [isProd ? _miniCssExtractPlugin.default.loader : require.resolve("style-loader"), {
       loader: require.resolve("css-loader"),
       options: {
-        modules: false,
+        modules: {
+          mode: "local",
+          localIdentName: "[name]__[local]--[hash:base64:5]"
+        },
         sourceMap: !isProd,
         importLoaders
       }

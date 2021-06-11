@@ -72,12 +72,13 @@ const getGeneratorWebpackConf = (env, mode, report) => {
     };
   }
 
-  defaultPlugins.push(new _webpack.DefinePlugin({
+  let define = {
     "process.env": {
-      NODE_ENV: JSON.stringify(env),
-      ...(config.defineStringified || {})
-    }
-  }));
+      NODE_ENV: JSON.stringify(env)
+    },
+    ...(config.defineStringified || {})
+  };
+  defaultPlugins.push(new _webpack.DefinePlugin(define));
   const webpackConf = {
     mode: env,
     devtool: isProd ? false : "cheap-module-source-map",

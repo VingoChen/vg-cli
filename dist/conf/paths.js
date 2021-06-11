@@ -19,7 +19,7 @@ function resolveApp(relativePath) {
 } // Default module extension
 
 
-const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx'];
+const moduleFileExtensions = ["ts", "tsx", "js", "jsx"];
 /**
  * Resolve module path
  * @param {function} resolveFn resolve function
@@ -38,16 +38,16 @@ function resolveModule(resolveFn, filePath) {
 }
 
 module.exports = {
-  appBuild: resolveApp('build'),
-  appPublic: resolveApp('public'),
-  appIndex: resolveModule(resolveApp, 'src/index'),
+  appBuild: resolveApp("build"),
+  appPublic: resolveApp("public"),
+  appIndex: resolveModule(resolveApp, "src/index"),
   // Package entry path
-  appHtml: resolveApp('public/index.html'),
-  appNodeModules: resolveApp('node_modules'),
+  appHtml: resolveApp("public/index.html"),
+  appNodeModules: resolveApp("node_modules"),
   // node_modules path
-  appSrc: resolveApp('src'),
-  appProxySetup: resolveModule(resolveApp, 'src/setProxy'),
-  appPackageJson: resolveApp('package.json'),
-  appTsConfig: resolveApp('tsconfig.json'),
+  appSrc: resolveApp("src"),
+  appProxySetup: resolveModule(resolveApp, "src/setProxy"),
+  appPackageJson: resolveApp("package.json"),
+  appTsConfig: resolveApp("tsconfig.json"),
   moduleFileExtensions
 };

@@ -25,15 +25,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 const getPlugins = isProd => {
   const devPlugins = [new _webpack.HotModuleReplacementPlugin(), new _errorOverlayWebpackPlugin.default(), new _webpackbar.default({
-    name: 'RUNNING',
-    color: '#52c41a'
+    name: "RUNNING",
+    color: "#52c41a"
   })];
   const prodPlugins = [new _cleanWebpackPlugin.CleanWebpackPlugin(), new _miniCssExtractPlugin.default({
-    filename: 'css/[name].[contenthash:8].css',
-    chunkFilename: 'css/[name].[contenthash:8].chunk.css'
+    filename: "css/[name].[contenthash:8].css",
+    chunkFilename: "css/[name].[contenthash:8].chunk.css"
   }), new _webpackbar.default({
-    name: 'BUNDLING',
-    color: '#722ed1'
+    name: "BUNDLING",
+    color: "#722ed1"
   })];
   const defaultPlugins = [new _htmlWebpackPlugin.default({
     template: _paths.default.appHtml,
@@ -41,13 +41,13 @@ const getPlugins = isProd => {
   }), new _copyWebpackPlugin.default({
     patterns: [{
       context: _paths.default.appPublic,
-      from: '*',
+      from: "*",
       to: _paths.default.appBuild,
-      toType: 'dir',
+      toType: "dir",
       globOptions: {
         dot: true,
         gitignore: true,
-        ignore: ['**/index.html']
+        ignore: ["**/index.html"]
       }
     }]
   }), new _forkTsCheckerWebpackPlugin.default({
