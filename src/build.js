@@ -1,14 +1,32 @@
 import Webpack from "webpack";
 import getGeneratorWebpackConf from "./conf/getGeneratorWebpackConf";
-import logger from "./conf/logger";
 
 const build = async (mode = "dev", report) => {
 	const webpackBuildConf = getGeneratorWebpackConf("production", mode, report);
 
-	Webpack(webpackBuildConf, err => {
+	Webpack(webpackBuildConf, (err, stats) => {
 		if (err) {
-			logger.error(err);
+			console.error(err.stack || err);
+			if (err.details) {
+				console.error(err.details);
+			}
+			return;
 		}
+
+		const info = stats.toJson();
+
+		if (stats.hasErrors()) {
+			console.error(info.errors);
+		}
+
+		if (stats.hasWarnings()) {
+			console.warn(info.warnings);
+		}
+		console.log(
+			stats.toString({
+				colors: true,
+			})
+		);
 	});
 };
 
